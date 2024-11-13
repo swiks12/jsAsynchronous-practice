@@ -14,5 +14,4 @@ const hello=()=>{
 }
 
 // in function call it should be name of function and in function definition part callback represents the fuction
-
 greet(hello);
