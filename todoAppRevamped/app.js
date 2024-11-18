@@ -14,14 +14,29 @@ const fetchedTodosLocalStorage=()=>{
     return getTodosFromLocalStorage;
 }
 
+
+const handleComplete=(i)=>{
+    const updateTodoCompleted=document.querySelectorAll(".todo-parent-div");
+    const completedItem=updateTodoCompleted[i]
+    completedItem.classList.add("todo-completed");
+}
+
+
+
+
+
+
 // passing the index of the todo-item to be deleted
 const handleDelete=(index)=>{
     // splice ma first parameter is index and second is how many items to delete from that index
     todos.splice(index,1);
     console.log(todos)
     localStorage.setItem("todos",JSON.stringify(todos));
-    
-    
+    // updating the dom to reflect the changes
+    // this step removes the need to refresh the page to see the deleted dom
+    // querySelectorAll gives a nodelist ani we can remove the particular node to update the dom
+    const updateDOM=document.querySelectorAll(".todo-parent-div");
+    updateDOM[index].remove();
 }
 
 const handleCreate=()=>{
@@ -62,7 +77,7 @@ const getTodos=()=>{
         var crossBtn=document.createElement("button");
         tickBtn.innerHTML='<span class="material-symbols-outlined">check</span>';
         crossBtn.innerHTML='<span class="material-symbols-outlined">close</span>'
-        // creating a div to put what needs to be shown in a conatiner so that not all items are considered seperate children
+        // creating a div to put what needs to be shown in a container so that not all items are considered seperate children
         parentDiv.classList.add("todo-parent-div")
         btnDiv.classList.add("todo-btn-div")
         pEl.classList.add("todo-item")
@@ -76,6 +91,10 @@ const getTodos=()=>{
         btnDiv.appendChild(crossBtn);
 
 
+        // event listeners
+        tickBtn.addEventListener("click",()=>{
+            handleComplete(i)
+        })
         crossBtn.addEventListener("click",()=>{handleDelete(i)})  
 
     }

@@ -20,10 +20,10 @@
 }
 
 #todo-create-btn{
-    background-color:chocolate;
+    background-color:#2b1a12;
     padding: 5px;
     font-weight: bold;
-    
+    color:white;
 }
 
 #todo-txt-field{
@@ -46,8 +46,9 @@
     border-radius: 50%;
     height: 36px;
     width: 36px;
-    background-color: #04d438;
-    color: white;
+    /* background-color: #04d438; */
+    background-color: #fff4e4;
+    color: black;
     text-align: center;
 }
 
@@ -56,8 +57,10 @@
     border-radius: 50%;
     height: 36px;
     width: 36px;
-    background-color:red;
-    color: white;
+    /* background-color:red;
+    color: white; */
+    background-color: #fff4e4;
+    color: black;
     text-align: center;
 }
 
@@ -68,10 +71,10 @@
     justify-content: center;
     align-items: center;
     /* background-color: aliceblue; */
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* overflow-x: auto;
+    overflow-y: auto; */
     /* when a specific height is selecred the content overflows and half of the content goes overboard */
-    /* height: 300px */
+    /* height: 300px; */
 }
 
 
@@ -90,4 +93,12 @@
 
 body{
     background-color: #fff4e4;
+}
+
+
+
+.todo-completed{
+    text-decoration: line-through;
+    color: gray;
+    opacity: 0.5;
 }
