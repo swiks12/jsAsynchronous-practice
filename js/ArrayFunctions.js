@@ -5,9 +5,7 @@ const arr=[5,10,15,20];
 const newArr=arr.map(data=>data*10);
 console.log(newArr);
 
-
 // filter odd number from an array
-
 const data=[2,5,6,12,19];
 
 const oddArr=data.filter(item=>item%2!=0);
@@ -33,4 +31,4 @@ const peoples=[{
 ]
 
 const filterMale=peoples.filter(item=>item.gender==="male");
-console.log(filterMale)
+console.log(filterMale);

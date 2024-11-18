@@ -1,0 +1,93 @@
+.todo-div{
+    /* background-color: red; */
+    height: 200px;
+    width:500px;
+    border: gray solid 1px;
+    border-radius: 20px;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px;
+} 
+
+#todo-parent{
+    /* background-color: yellow; */
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#todo-create-btn{
+    background-color:chocolate;
+    padding: 5px;
+    font-weight: bold;
+    
+}
+
+#todo-txt-field{
+    padding: 5px;
+    border:black 1px solid
+}
+
+.todo-item{
+    padding: 10px 20px 10px 20px;
+    /* display: flex;    */
+    background-color:#2b1a12;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 30vw;
+    word-wrap: break-word;
+    color: white;
+}
+
+.tick-btn{
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    background-color: #04d438;
+    color: white;
+    text-align: center;
+}
+
+
+.cross-btn{
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    background-color:red;
+    color: white;
+    text-align: center;
+}
+
+.todo-container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aliceblue; */
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* when a specific height is selecred the content overflows and half of the content goes overboard */
+    /* height: 300px */
+}
+
+
+.todo-parent-div{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.todo-btn-div{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+body{
+    background-color: #fff4e4;
+}
