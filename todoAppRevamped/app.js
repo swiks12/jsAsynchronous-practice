@@ -92,10 +92,17 @@ const getTodos=()=>{
 
 
         // event listeners
-        tickBtn.addEventListener("click",()=>{
-            handleComplete(i)
-        })
-        crossBtn.addEventListener("click",()=>{handleDelete(i)})  
+        tickBtn.addEventListener("click", (e) => {
+            const completedItem = e.target.closest(".todo-parent-div"); // Get the parent div
+            completedItem.classList.add("todo-completed");
+        });
+        
+        crossBtn.addEventListener("click", (e) => {
+            const todoDiv = e.target.closest(".todo-parent-div"); // Find the clicked todo
+            const todoIndex = Array.from(getTodoContainer.children).indexOf(todoDiv); // Get its index
+            handleDelete(todoIndex);
+        });
+         
 
     }
 }
