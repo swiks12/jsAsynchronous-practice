@@ -1,0 +1,36 @@
+{
+  "todos": [
+    {
+      "id": "2",
+      "todoText": "Cooking",
+      "completed": true
+    },
+    {
+      "id": "390e",
+      "newTodo": {
+        "todoText": "hello",
+        "compled": false
+      }
+    },
+    {
+      "id": "7b79",
+      "todoText": "bye bye",
+      "completed": false
+    },
+    {
+      "id": "0b0f",
+      "todoText": "hello",
+      "completed": false
+    },
+    {
+      "id": "f62c",
+      "todoText": "join the session",
+      "completed": false
+    },
+    {
+      "id": "99c0",
+      "todoText": "join the ui ux session today",
+      "completed": false
+    }
+  ]
+}
