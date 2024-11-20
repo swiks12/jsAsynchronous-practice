@@ -22,10 +22,6 @@ const handleComplete=(i)=>{
 }
 
 
-
-
-
-
 // passing the index of the todo-item to be deleted
 const handleDelete=(index)=>{
     // splice ma first parameter is index and second is how many items to delete from that index
