@@ -24,26 +24,14 @@ const handleComplete=(completeId)=>{
     const response=fetch(`http://localhost:3000/todos/${completeId}`,{method:'PATCH',headers:{
         'Content-Type':'application/json'
     },
-    body:JSON.stringify(updateStatus)})
+    body:JSON.stringify(updateStatus)});
+
     
 }
 
 
-// passing the index of the todo-item to be deleted
-// const handleDelete=(index)=>{
-//     // splice ma first parameter is index and second is how many items to delete from that index
-//     todos.splice(index,1);
-//     console.log(todos)
-//     localStorage.setItem("todos",JSON.stringify(todos));
-//     // updating the dom to reflect the changes
-//     // this step removes the need to refresh the page to see the deleted dom
-//     // querySelectorAll gives a nodelist ani we can remove the particular node to update the dom
-//     const updateDOM=document.querySelectorAll(".todo-parent-div");
-//     updateDOM[index].remove();
-// }
 
 handleDelete=(deleteId)=>{
-    // alert(`The delete id is ${deleteId}`);
     const response=fetch(`http://localhost:3000/todos/${deleteId}`,{method:'DELETE'})
 }
 
@@ -108,19 +96,10 @@ const getTodos=async()=>{
         parentDiv.appendChild(btnDiv)
         btnDiv.appendChild(tickBtn);
         btnDiv.appendChild(crossBtn);
+        if(fetchedTodos[i].completed==true){
+            parentDiv.classList.add("todo-completed")
+        }
 
-
-        // // event listeners
-        // tickBtn.addEventListener("click", (e) => {
-        //     const completedItem = e.target.closest(".todo-parent-div"); // Get the parent div
-        //     completedItem.classList.add("todo-completed");
-        // });
-        
-        // crossBtn.addEventListener("click", (e) => {
-        //     const todoDiv = e.target.closest(".todo-parent-div"); // Find the clicked todo
-        //     const todoIndex = Array.from(getTodoContainer.children).indexOf(todoDiv); // Get its index
-        //     handleDelete(todoIndex);
-        // });
         crossBtn.addEventListener("click",()=>{
             handleDelete(fetchedTodos[i].id)
         })
