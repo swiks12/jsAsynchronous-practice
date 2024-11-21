@@ -4,9 +4,15 @@ const api="http://localhost:3000/todos";
 
 
 // selectors
+// const body=document.querySelector("body");
 const todoTextFieldValue=document.querySelector("#todo-txt-field");
+const openPopUpBtn=document.querySelector("#open-popup");
+const popUpCreateBtn=document.querySelector("#popup-btn-create");
+const popUpCloseBtn=document.querySelector("#popup-btn-close");
 const createBtn=document.querySelector("#todo-create-btn");
 const getTodoContainer=document.querySelector(".todo-container");
+const popUpContainer=document.querySelector(".popup-container");
+const trackStatus=document.getElementById("todo-status");
 
 
 
@@ -17,6 +23,42 @@ const fetchTodoFromDB=async(e)=>{
     return todos;
     // console.log(todos)
 }
+
+
+const handleCreate=async(e)=>{
+    e.preventDefault();
+    let todoValue=todoTextFieldValue.value;
+    const newTodo={todoText:todoValue,completed:false}
+    const response=await fetch(api,{method:'POST',
+        headers:{
+            // content ko type chai json vanera bujhne kaam ko lagi ho yo
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(newTodo)
+    })
+    alert("todo-added")
+    getTodos();
+}
+
+openPopUpBtn.addEventListener("click",()=>{
+    popUpContainer.hidden=false;
+    getTodoContainer.hidden=true;
+    trackStatus.hidden=true;
+    openPopUpBtn.hidden=true;
+    
+})
+
+popUpCreateBtn.addEventListener("click",handleCreate)
+
+popUpCloseBtn.addEventListener("click",()=>{
+    // hiding the modal
+    popUpContainer.hidden=true;
+    getTodoContainer.hidden=false
+    trackStatus.hidden=false
+    openPopUpBtn.hidden=false;
+
+})
+
 
 // reload problem solved by putting the db file outside in d drive ,the chnages bot being seen was due to async await missing in parts
 const handleComplete=async(completeId)=>{
@@ -34,19 +76,6 @@ const handleDelete=async(deleteId)=>{
     getTodos();
 }
 
-const handleCreate=async(e)=>{
-    e.preventDefault();
-    let todoValue=todoTextFieldValue.value;
-    const newTodo={todoText:todoValue,completed:false}
-    const response=await fetch(api,{method:'POST',
-        headers:{
-            // content ko type chai json vanera bujhne kaam ko lagi ho yo
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(newTodo)
-    })
-    getTodos();
-}
 
 
 const displayTodo=(fetchedTodos,status)=>{
@@ -96,7 +125,6 @@ const getTodos=async(e)=>{
     let fetchedTodos=await fetchTodoFromDB();
     console.log(fetchedTodos,"from this")
     console.log(fetchedTodos.length);
-    const trackStatus=document.getElementById("todo-status");
        displayTodo(fetchedTodos,trackStatus.value);
     let initialStatus;
     trackStatus.addEventListener("change",()=>{
@@ -118,7 +146,7 @@ getTodos();
 
 
 // event listeners
-createBtn.addEventListener("click",handleCreate);
+// createBtn.addEventListener("click",handleCreate);
 
 
 
