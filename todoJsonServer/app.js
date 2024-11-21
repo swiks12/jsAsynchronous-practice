@@ -45,8 +45,9 @@ const handleCreate=()=>{
 }
 
 
-const displayTodo=(fetchedTodos)=>{
+const displayTodo=(fetchedTodos,status)=>{
     // if i do not clear the inner html then jun completed array return huncha tyasmai append huncha dekhaune bela harek patak div chai clear garnu parxa
+    // console.log(status,"from here")
     getTodoContainer.innerHTML=" ";
     for (let i = 0; i < fetchedTodos.length; i++) {
         // console.log(trackStatus.value)
@@ -70,6 +71,11 @@ const displayTodo=(fetchedTodos)=>{
             parentDiv.appendChild(btnDiv)
             btnDiv.appendChild(tickBtn);
             btnDiv.appendChild(crossBtn);
+            if(status=="All" && fetchedTodos[i].completed==true){
+                const completedTodo=document.querySelectorAll(".todo-parent-div");    //add class list garesi actual class add huncha
+                completedTodo[i].classList.add("todo-completed")
+                
+            }
     
             crossBtn.addEventListener("click",()=>{
                 handleDelete(fetchedTodos[i].id)
@@ -86,19 +92,19 @@ const getTodos=async()=>{
     console.log(fetchedTodos,"from this")
     console.log(fetchedTodos.length);
     const trackStatus=document.getElementById("todo-status");
-       displayTodo(fetchedTodos);
+       displayTodo(fetchedTodos,trackStatus.value);
     var initialStatus;
     trackStatus.addEventListener("change",()=>{
         initialStatus=trackStatus.value;
 
         if(initialStatus=="Completed"){       
             const completedtodos=fetchedTodos.filter(item=>item.completed==true);
-            displayTodo(completedtodos)
+            displayTodo(completedtodos,"Completed")
         }
         else if (initialStatus=="All") {
-            displayTodo(fetchedTodos)
+            displayTodo(fetchedTodos,"All")
         } else {
-            displayTodo(fetchedTodos.filter(item=>item.completed==false))
+            displayTodo(fetchedTodos.filter(item=>item.completed==false),"Incomplete")
         }
     })
 }
