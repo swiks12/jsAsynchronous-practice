@@ -1,7 +1,7 @@
 // [] i s atruthy vakues which always true regardless of it contains value or not
 
 const api="http://localhost:3000/todos";
-var todos=JSON.parse(localStorage.getItem("todos")) || [] ;
+
 
 // selectors
 const todoTextFieldValue=document.querySelector("#todo-txt-field");
@@ -11,37 +11,41 @@ const getTodoContainer=document.querySelector(".todo-container");
 
 
 // functions
-const fetchedTodo=async()=>{
+const fetchTodoFromDB=async(e)=>{
     const response=await fetch(api);
     const todos=await response.json();
     return todos;
     // console.log(todos)
 }
 
-
+// reload problem solved by putting the db file outside in d drive ,the chnages bot being seen was due to async await missing in parts
 const handleComplete=async(completeId)=>{
     const updateStatus={completed:true};
     const response=await fetch(`http://localhost:3000/todos/${completeId}`,{method:'PATCH',headers:{
         'Content-Type':'application/json'
     },
     body:JSON.stringify(updateStatus)}); 
+    getTodos();
 }
 
 
-handleDelete=(deleteId)=>{
-    const response=fetch(`http://localhost:3000/todos/${deleteId}`,{method:'DELETE'})
+const handleDelete=async(deleteId)=>{
+    const response=await fetch(`http://localhost:3000/todos/${deleteId}`,{method:'DELETE'})
+    getTodos();
 }
 
-const handleCreate=()=>{
-    var todoValue=todoTextFieldValue.value;
+const handleCreate=async(e)=>{
+    e.preventDefault();
+    let todoValue=todoTextFieldValue.value;
     const newTodo={todoText:todoValue,completed:false}
-    const response=fetch(api,{method:'POST',
+    const response=await fetch(api,{method:'POST',
         headers:{
             // content ko type chai json vanera bujhne kaam ko lagi ho yo
             'Content-Type':'application/json'
         },
         body:JSON.stringify(newTodo)
     })
+    getTodos();
 }
 
 
@@ -69,6 +73,7 @@ const displayTodo=(fetchedTodos,status)=>{
             getTodoContainer.appendChild(parentDiv);
             parentDiv.appendChild(pEl);
             parentDiv.appendChild(btnDiv)
+            //if the staus is  'All' and if completed is true then sabai todo dekhauda ali kam opcity huncha
             btnDiv.appendChild(tickBtn);
             btnDiv.appendChild(crossBtn);
             if(status=="All" && fetchedTodos[i].completed==true){
@@ -87,13 +92,13 @@ const displayTodo=(fetchedTodos,status)=>{
     }
 }
 
-const getTodos=async()=>{
-    var fetchedTodos=await fetchedTodo();
+const getTodos=async(e)=>{
+    let fetchedTodos=await fetchTodoFromDB();
     console.log(fetchedTodos,"from this")
     console.log(fetchedTodos.length);
     const trackStatus=document.getElementById("todo-status");
        displayTodo(fetchedTodos,trackStatus.value);
-    var initialStatus;
+    let initialStatus;
     trackStatus.addEventListener("change",()=>{
         initialStatus=trackStatus.value;
 
@@ -104,7 +109,8 @@ const getTodos=async()=>{
         else if (initialStatus=="All") {
             displayTodo(fetchedTodos,"All")
         } else {
-            displayTodo(fetchedTodos.filter(item=>item.completed==false),"Incomplete")
+            const incompleteTodos=fetchedTodos.filter(item=>item.completed==false)
+            displayTodo(incompleteTodos,"Incomplete")
         }
     })
 }
