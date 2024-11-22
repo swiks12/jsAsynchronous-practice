@@ -149,3 +149,6 @@ h3{
     box-shadow: 10px 10px ;
 }
 
+.dragging{
+    opacity:0;
+}
