@@ -20,7 +20,7 @@ const handleCreate = async (e) => {
     e.preventDefault();
     let todoValue = todoTextFieldValue.value;
     const newTodo = { todoText: todoValue, completed: false };
-    const response = await fetch(api, {
+    await fetch(api, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ popUpCloseBtn.addEventListener("click", () => {
 
 const handleComplete = async (completeId) => {
     const updateStatus = { completed: true };
-    const response = await fetch(`http://localhost:3000/todos/${completeId}`, {
+    await fetch(`http://localhost:3000/todos/${completeId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ const dragAfterElement = (container, y) => {
 };
 
 const displayTodo = (fetchedTodos, status) => {
-    todoContainer.innerHTML = " ";
+    todoContainer = " ";
     for (let i = 0; i < fetchedTodos.length; i++) {
         var parentDiv = document.createElement("div");
         var btnDiv = document.createElement("div");
