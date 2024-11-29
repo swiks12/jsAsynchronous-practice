@@ -32,7 +32,8 @@ const SignUp = () => {
       <div className="flex justify-center items-center h-[100vh] bg-gray-100">
         <div className="flex rounded-2xl h-[90vh]  gap-[90px] justify-center items-center pt-[80px] pr-[80px] pb-[80px] shadow-2xl  bg-white">
           <img
-            src="https://cdn.dribbble.com/users/1987152/screenshots/6337035/final_4x.png?resize=768x576&vertical=center"
+            // src="https://cdn.dribbble.com/users/1987152/screenshots/6337035/final_4x.png?resize=768x576&vertical=center"
+            src="https://cdn.dribbble.com/userupload/16768469/file/original-42c31692783f9934ee93d55a80498d88.jpg?resize=1200x900&vertical=center"
             className="h-[90vh] w-[50vw] object-cover rounded-l-2xl"
           />
 
