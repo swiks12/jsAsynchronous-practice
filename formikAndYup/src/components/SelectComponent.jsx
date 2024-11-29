@@ -1,15 +1,17 @@
 import React from "react";
-import { FormControl,InputLabel,Select,MenuItem } from "@mui/material";
+import { FormControl,InputLabel,Select,MenuItem, FormHelperText } from "@mui/material";
+import { red } from "@mui/material/colors";
 
-const SelectComponent = ({option1,option2,option3,selectId,labelId,labelText}) => {
+const SelectComponent = (props) => {
   return (
-    <FormControl>
-      <InputLabel id={labelId}>{labelText}</InputLabel>
-      <Select labelId={labelId} id={selectId} size="small">
-        <MenuItem value={option1}>{option1}</MenuItem>
-        <MenuItem value={option2}>{option2}</MenuItem>
-        <MenuItem value={option3}>{option3}</MenuItem>
+    <FormControl >
+      <InputLabel id={props.labelId}>{props.labelText}</InputLabel>
+      <Select labelId={props.labelId} id={props.selectId} size="small" value={props.value} onChange={props.handleChange} name="selectVal" onBlur={props.handleBlur} >
+        <MenuItem value={props.option1}>{props.option1}</MenuItem>
+        <MenuItem value={props.option2}>{props.option2}</MenuItem>
+        <MenuItem value={props.option3}>{props.option3}</MenuItem>
       </Select>
+      <FormHelperText sx={{color:red[600]}}>{props.error}</FormHelperText>
     </FormControl>
   );
 };
