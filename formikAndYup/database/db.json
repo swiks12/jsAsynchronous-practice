@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "a title",
+      "email": "yup@email.com",
+      "password": "password",
+      "selectVal": "India"
+    },
+    {
+      "id": "e3e6",
+      "name": "Satya Kumar",
+      "email": "winkipie1221@gmail.com",
+      "password": "swikriti@2024Q",
+      "selectVal": "Nepal"
+    },
+    {
+      "id": "12cb",
+      "name": "swikriti",
+      "email": "swiks@gmail.com",
+      "password": "swiks12@SUWAL",
+      "selectVal": "Nepal"
+    }
+  ]
+}

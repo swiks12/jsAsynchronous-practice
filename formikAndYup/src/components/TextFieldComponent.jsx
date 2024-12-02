@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, InputAdornment } from "@mui/material";
 
-const TextFieldComponent = (props ) => {
+const TextFieldComponent = (props) => {
   return (
     <TextField
       id="outlined-basic"
