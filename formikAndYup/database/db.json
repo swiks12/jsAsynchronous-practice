@@ -34,6 +34,14 @@
       "email": "swikriti@gmail.com",
       "password": "swiks12@Q",
       "selectVal": "Nepal"
+    },
+    {
+      "id": "e019",
+      "name": "Satya Kumar",
+      "email": "admin@gmail.com",
+      "password": "Swikriti2024@",
+      "selectVal": "Nepal"
     }
+    
   ]
 }
