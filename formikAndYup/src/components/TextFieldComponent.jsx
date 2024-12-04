@@ -1,27 +1,27 @@
 import React from "react";
 import { TextField, InputAdornment } from "@mui/material";
 
-const TextFieldComponent = (props) => {
+const TextFieldComponent = ({name,placeholder,iconName,value,handleChange,handleBlur,type,error}) => {
   return (
     <TextField
       id="outlined-basic"
       variant="outlined"
-      name={props.name}
-      placeholder={props.placeholder}
+      name={name}
+      placeholder={placeholder}
       fullWidth
       size="small"
-      type={props.type}
-      value={props.value}
-      onChange={props.handleChange}
-      onBlur={props.handleBlur}
-      error={props.error}
-      helperText={props.error}
+      type={type}
+      value={value}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      error={error}
+      helperText={error}
       slotProps={{
         input: {
           startAdornment: (
             // InputAdornment can be used to add prefix,suffix and action to the input
             <InputAdornment>
-              <span class="material-symbols-outlined">{props.iconName}</span>
+              <span class="material-symbols-outlined">{iconName}</span>
             </InputAdornment>
           ),
         },

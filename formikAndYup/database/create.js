@@ -1,6 +1,8 @@
 const api="http://localhost:3000/users";
+// const bcrypt=require("bcrypt");
 
 const createUser=async(name,email,password,selectVal)=>{
+    
     await fetch(api, {
         method: "POST",
         headers: {

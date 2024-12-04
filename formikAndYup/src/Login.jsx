@@ -28,12 +28,9 @@ const Login = () => {
                   name="password"
                   placeholder="Enter your password"
                   iconName="lock"
-                  // value={formik.values.password}
-                  // handleChange={formik.handleChange}
-                  // handleBlur={formik.handleBlur}
+                  
                   type="password"
                   // endIcon="visibility"
-                  // error={formik.touched.password && formik.errors.password}
                 />
 
                 <ButtonComponent name="Log In" type="submit" />
