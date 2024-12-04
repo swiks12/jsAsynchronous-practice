@@ -6,7 +6,7 @@ import CheckBoxComponent from "./components/CheckBoxComponent";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import createUser from "../database/create"
+import createUser from "../database/create";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -43,12 +43,12 @@ const SignUp = () => {
     onSubmit: async (values, { resetForm }) => {
       // alert(JSON.stringify(values))
       console.log(values);
-      const name=formik.values.name;
-      const email=formik.values.email;
-      const password=formik.values.password;
-      const selectVal=formik.values.selectVal;
+      const name = values.name;
+      const email = values.email;
+      const password = values.password;
+      const selectVal = values.selectVal;
       // create user logic form here
-      createUser(name,email,password,selectVal);
+      createUser(name, email, password, selectVal);
       resetForm({ values: "" });
       navigate("/login");
     },
@@ -59,7 +59,6 @@ const SignUp = () => {
       <div className="flex justify-center items-center h-[100vh] bg-gray-100">
         <div className="flex rounded-2xl h-[90vh]  gap-[90px] justify-center items-center pt-[80px] pr-[80px] pb-[80px] shadow-2xl  bg-white border border-gray-200 w-[85vw]">
           <img
-            // src="https://cdn.dribbble.com/users/1987152/screenshots/6337035/final_4x.png?resize=768x576&vertical=center"
             src="https://cdn.dribbble.com/userupload/16768469/file/original-42c31692783f9934ee93d55a80498d88.jpg?resize=1200x900&vertical=center"
             className="h-[90vh] w-[53vw] object-cover rounded-l-2xl"
           />

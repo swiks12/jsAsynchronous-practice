@@ -1,8 +1,8 @@
 const api="http://localhost:3000/users";
-// const bcrypt=require("bcrypt");
+// require doesnt exist on clinet side
+
 
 const createUser=async(name,email,password,selectVal)=>{
-    
     await fetch(api, {
         method: "POST",
         headers: {
@@ -16,5 +16,8 @@ const createUser=async(name,email,password,selectVal)=>{
         }),
       });
 }
+
+
+
 
 export default createUser;
