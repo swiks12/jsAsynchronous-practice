@@ -19,11 +19,8 @@ const findUserForlogin=async(email,password)=>{
       if(findUserFromDb.password===password){
         return {success:true,message:"Login Successfull"}
       }else{
-        return { success: false, message: "Invalid password." };
+        return { success: false, message: "Invalid password!" };
       }
-      
-  
-  
     } catch (error) {
       return { success: false, message: error.message };
     }
