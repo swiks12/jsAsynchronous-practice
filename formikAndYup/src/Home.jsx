@@ -249,21 +249,30 @@ const Home = () => {
   }, [editorConfig]);
 
   return (
-    <div className="main-container">
-      <div
-        className="editor-container editor-container_classic-editor"
-        ref={editorContainerRef}
-      >
-        <div className="editor-container__editor">
-          <div ref={editorRef}>
-            {ClassicEditor && editorConfig && (
-              <CKEditor editor={ClassicEditor} config={editorConfig} />
-            )}
+    <>
+      <div className="flex justify-center">
+        <div className="h-[50vh] w-[60vw] border border-purple-600 border-1 mt-12 rounded-2xl shadow-lg">
+          <p className="text-2xl font-bold text-center mt-6 mb-12">
+            Welcome to the Dashboard{" "}
+            <span className="text-purple-600 ">{userName}!</span>
+          </p>
+          <div className="main-container">
+            <div
+              className="editor-container editor-container_classic-editor"
+              ref={editorContainerRef}
+            >
+              <div className="editor-container__editor">
+                <div ref={editorRef}>
+                  {ClassicEditor && editorConfig && (
+                    <CKEditor editor={ClassicEditor} config={editorConfig} />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <p>{userName}</p>
       </div>
-    </div>
+    </>
   );
 };
 
