@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import Home from "./Home";
 import "react-toastify/ReactToastify.css";
 import PageNotFound from "./PageNotFound";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<PrivateRoute component={<Home/>} />}/>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
