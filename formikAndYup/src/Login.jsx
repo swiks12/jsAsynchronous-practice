@@ -6,10 +6,12 @@ import * as yup from "yup";
 import findUserForlogin from "../database/loginLogic";
 import { toast} from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateId,updateName,updateLoggedStatus } from "./features/userSlice";
 
 const Login = () => {
   const navigate=useNavigate();
-
+  const dispatch=useDispatch();
   const validationSchema=yup.object({
     email:yup.string().email("Enter valid email").required("Email is required"),
     password:yup.string().required("Password is required")
@@ -27,6 +29,12 @@ const Login = () => {
       if (successval===false){
         toast.error(response.message)
       }else{
+        const id=response.id;
+        const name=response.name;
+        // dispatch use garera we can access the reducers
+        dispatch(updateId(id));
+        dispatch(updateName(name));
+        dispatch(updateLoggedStatus())
         toast.success(response.message)
         navigate("/home");
       }

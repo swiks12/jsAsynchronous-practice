@@ -3,7 +3,6 @@ const api="http://localhost:3000/users";
 
 
 const findUserForlogin=async(email,password)=>{
-    console.log(email,password)
     try {
       const userData=await fetch(api,{
         method:'GET',
@@ -17,7 +16,7 @@ const findUserForlogin=async(email,password)=>{
       }
 
       if(findUserFromDb.password===password){
-        return {success:true,message:"Login Successfull"}
+        return {success:true,message:"Login Successfull",id:findUserFromDb.id,name:findUserFromDb.name}
       }else{
         return { success: false, message: "Invalid password!" };
       }
