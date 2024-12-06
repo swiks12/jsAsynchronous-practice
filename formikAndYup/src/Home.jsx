@@ -254,13 +254,13 @@ const Home = () => {
     }
   }, [editorConfig]);
 
-  const handleClick = async() => {
-    const response=await updateDescription(id,content);
-    const success=response.success
-    const message=response.message;
-    (success===true)?toast.success(message):toast.error(message)
+  const handleClick = async () => {
+    const response = await updateDescription(id, content);
+    const success = response.success;
+    const message = response.message;
+    success === true ? toast.success(message) : toast.error(message);
   };
-
+  console.log("I am home");
   return (
     <>
       <div className="flex justify-center">
