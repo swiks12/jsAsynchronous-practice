@@ -11,7 +11,7 @@ const LICENSE_KEY = import.meta.env.VITE_LICENSE_KEY;
 const Home = () => {
   // accesiing the variables method
   // state(this is global or known to the entire project).nameOfSlice(store ma vako name not the slice ko name).values
-  const userName = useSelector((state) => state.user.name);
+  const userName = useSelector((state) => state.user.data.name);
   const editorContainerRef = useRef(null);
   const editorRef = useRef(null);
   const [isLayoutReady, setIsLayoutReady] = useState(false);
