@@ -19,8 +19,8 @@ const BreadCrumbs = () => {
     });
   return (
     <>
-      <div className="border w-fit ml-12 p-4">
-        <div className="text-purple-800 text-xl flex gap-4">{crumbs}</div>
+      <div className="border w-fit ml-12 pl-2 pr-2">
+        <div className="text-purple-800 text-xl flex gap-4 w-fit">{crumbs}</div>
       </div>
 
       <Outlet />

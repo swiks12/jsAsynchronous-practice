@@ -269,9 +269,9 @@ const Home = () => {
             Welcome to the Dashboard{" "}
             <span className="text-purple-600 ">{userName}!</span>
           </p>
-          <div className="main-container">
+          <div className="main-container ">
             <div
-              className="editor-container editor-container_classic-editor"
+              className="editor-container editor-container_classic-editor ml-12"
               ref={editorContainerRef}
             >
               <p className="mb-6 text-center text-xl font-semibold">
