@@ -51,7 +51,7 @@ const Login = () => {
           })
         );
         toast.success(response.message);
-        navigate("/home");
+        navigate("/login/home");
       }
     },
   });
@@ -83,7 +83,7 @@ const Login = () => {
                   name="password"
                   placeholder="Enter your password"
                   iconName="lock"
-                  type="text"
+                  type="password"
                   value={formik.values.password}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}

@@ -7,15 +7,21 @@ import Home from "./Home";
 import "react-toastify/ReactToastify.css";
 import PageNotFound from "./PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
+import BreadCrumbs from "./components/BreadCrumbs";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<PrivateRoute component={<Home/>} />}/>
+          <Route path="/" element={<BreadCrumbs />}>
+            <Route index element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login/home"
+              element={<PrivateRoute component={<Home />} />}
+            />
+          </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
