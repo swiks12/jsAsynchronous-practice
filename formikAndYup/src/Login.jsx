@@ -4,44 +4,57 @@ import ButtonComponent from "./components/ButtonComponent";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import findUserForlogin from "../database/loginLogic";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { updateId,updateName,updateLoggedStatus } from "./features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateId, updateName, updateLoggedStatus } from "./features/userSlice";
 
 const Login = () => {
-  const navigate=useNavigate();
-  const dispatch=useDispatch();
-  const validationSchema=yup.object({
-    email:yup.string().email("Enter valid email").required("Email is required"),
-    password:yup.string().required("Password is required")
-  })
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loggedStatus = useSelector((state) => state.user.data);
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email("Enter valid email")
+      .required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
 
-  const formik=useFormik({
-    initialValues:{
-      email:'',
-      password:''
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
     },
-    validationSchema:validationSchema,
-    onSubmit:async(values)=>{
-      const response=await findUserForlogin(values.email,values.password);
-      const successval=response.success;
-      if (successval===false){
-        toast.error(response.message)
-      }else{
-        const id=response.id;
-        const name=response.name;
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      const response = await findUserForlogin(values.email, values.password);
+      const successval = response.success;
+      if (successval === false) {
+        toast.error(response.message);
+      } else {
+        const id = response.id;
+        const name = response.name;
         // dispatch use garera we can access the reducers
         dispatch(updateId(id));
         dispatch(updateName(name));
-        dispatch(updateLoggedStatus())
-        toast.success(response.message)
+        console.log(loggedStatus,"before update")
+
+        dispatch(updateLoggedStatus(true));
+        // after login wla part ta run vairako chaina
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: id,
+            name: name,
+            loggedStatus: true,
+          })
+        );
+        toast.success(response.message);
         navigate("/home");
       }
-      
-
-    }
-  })
+    },
+  });
   return (
     <>
       <div className="flex justify-center items-center h-[100vh] bg-gray-100">
@@ -49,7 +62,10 @@ const Login = () => {
           <div className="flex items-center justify-center ">
             <div>
               <p className="text-3xl font-bold mb-8 text-center">Welcome</p>
-              <form className="flex flex-col gap-4 w-[21vw] justify-center " onSubmit={formik.handleSubmit}>
+              <form
+                className="flex flex-col gap-4 w-[21vw] justify-center "
+                onSubmit={formik.handleSubmit}
+              >
                 {/* email */}
                 <TextFieldComponent
                   name="email"
@@ -60,7 +76,6 @@ const Login = () => {
                   handleBlur={formik.handleBlur}
                   type="text"
                   error={formik.touched.email && formik.errors.email}
-
                 />
 
                 {/* password */}
@@ -68,8 +83,7 @@ const Login = () => {
                   name="password"
                   placeholder="Enter your password"
                   iconName="lock"
-                  
-                  type="password"
+                  type="text"
                   value={formik.values.password}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
