@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { CKEditor, useCKEditorCloud } from "@ckeditor/ckeditor5-react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import "./App.css";
+import { Button } from "@mui/material";
+import ButtonComponent from "./components/ButtonComponent";
+import updateDescription from "../database/updateDescription";
 
 const CLOUD_SERVICES_TOKEN_URL = import.meta.env.VITE_CLOUD_SERVICES_TOKEN_URL;
 
@@ -11,7 +15,9 @@ const LICENSE_KEY = import.meta.env.VITE_LICENSE_KEY;
 const Home = () => {
   // accesiing the variables method
   // state(this is global or known to the entire project).nameOfSlice(store ma vako name not the slice ko name).values
+  const [content, setContent] = useState("");
   const userName = useSelector((state) => state.user.data.name);
+  const id = useSelector((state) => state.user.data.id);
   const editorContainerRef = useRef(null);
   const editorRef = useRef(null);
   const [isLayoutReady, setIsLayoutReady] = useState(false);
@@ -248,6 +254,13 @@ const Home = () => {
     }
   }, [editorConfig]);
 
+  const handleClick = async() => {
+    const response=await updateDescription(id,content);
+    const success=response.success
+    const message=response.message;
+    (success===true)?toast.success(message):toast.error(message)
+  };
+
   return (
     <>
       <div className="flex justify-center">
@@ -261,13 +274,36 @@ const Home = () => {
               className="editor-container editor-container_classic-editor"
               ref={editorContainerRef}
             >
+              <p className="mb-6 text-center text-xl font-semibold">
+                Write some words to describe about yourself!!
+              </p>
               <div className="editor-container__editor">
                 <div ref={editorRef}>
                   {ClassicEditor && editorConfig && (
-                    <CKEditor editor={ClassicEditor} config={editorConfig} />
+                    <CKEditor
+                      editor={ClassicEditor}
+                      config={editorConfig}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        // DOM parser le garda DOM  create vairacha of HTML
+                        const parser = new DOMParser();
+                        const text = parser.parseFromString(data, "text/html");
+                        // ani ya chai DOM ko jasari nai data access gareko huncha
+                        const editorText = text.body.textContent;
+                        console.log(editorText);
+                        setContent(editorText);
+                      }}
+                    />
                   )}
                 </div>
               </div>
+            </div>
+            <div className="w-[60vw] flex justify-center mt-6">
+              <ButtonComponent
+                name="Submit"
+                type="submit"
+                onClick={handleClick}
+              />
             </div>
           </div>
         </div>

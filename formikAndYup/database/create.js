@@ -13,6 +13,7 @@ const createUser=async(name,email,password,selectVal)=>{
           email:email,
           password:password,
           selectVal:selectVal,
+          description:null,
         }),
       });
 }
