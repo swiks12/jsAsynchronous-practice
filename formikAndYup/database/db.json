@@ -41,7 +41,14 @@
       "email": "admin@gmail.com",
       "password": "Swikriti2024@",
       "selectVal": "Nepal"
+    },
+    {
+      "id": "244a",
+      "name": "Sumana",
+      "email": "moon@gmail.com",
+      "password": "Swikriti2024@",
+      "selectVal": "Nepal",
+      "description": "Hi i am sumana i am a coder."
     }
-    
   ]
 }
