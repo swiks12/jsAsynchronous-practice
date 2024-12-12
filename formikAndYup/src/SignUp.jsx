@@ -5,7 +5,7 @@ import SelectComponent from "./components/SelectComponent";
 import CheckBoxComponent from "./components/CheckBoxComponent";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import createUser from "../database/create";
 
 const SignUp = () => {
@@ -147,6 +147,16 @@ const SignUp = () => {
                   handleBlur={formik.handleBlur}
                 />
                 <ButtonComponent name="Sign Up" type="submit" />
+                <p className="text-center">
+                  Already have an account?
+                  <Link
+                    className="font-bold"
+                    to={"/login"}
+                  >
+                    {" "}
+                    Login
+                  </Link>
+                </p>
               </form>
             </div>
           </div>
