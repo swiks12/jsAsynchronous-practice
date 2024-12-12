@@ -8,6 +8,7 @@ import "react-toastify/ReactToastify.css";
 import PageNotFound from "./PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import BreadCrumbs from "./components/BreadCrumbs";
+import Test from "./Test";
 
 const App = () => {
   return (
@@ -20,6 +21,10 @@ const App = () => {
             <Route
               path="/login/home"
               element={<PrivateRoute component={<Home />} />}
+            />
+            <Route
+              path="/login/home/test"
+              element={<Test />}
             />
           </Route>
           <Route path="*" element={<PageNotFound />} />

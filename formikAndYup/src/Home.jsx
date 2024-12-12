@@ -7,15 +7,18 @@ import "./App.css";
 import { Button } from "@mui/material";
 import ButtonComponent from "./components/ButtonComponent";
 import updateDescription from "../database/updateDescription";
+import { useNavigate } from "react-router-dom";
 
 const CLOUD_SERVICES_TOKEN_URL = import.meta.env.VITE_CLOUD_SERVICES_TOKEN_URL;
 
 const LICENSE_KEY = import.meta.env.VITE_LICENSE_KEY;
 
 const Home = () => {
+  const navigate = useNavigate();
   // accesiing the variables method
   // state(this is global or known to the entire project).nameOfSlice(store ma vako name not the slice ko name).values
   const [content, setContent] = useState("");
+  const [image, setImage] = useState(null);
   const userName = useSelector((state) => state.user.data.name);
   const id = useSelector((state) => state.user.data.id);
   const editorContainerRef = useRef(null);
@@ -254,13 +257,29 @@ const Home = () => {
     }
   }, [editorConfig]);
 
+  const handleImage = (e) => {
+    console.log(e);
+    const file = e.target.files[0];
+    if (file) {
+      //converting to base64 used to store images of small size
+      const reader = new FileReader();
+      reader.readAsDataURL(file); //for base64
+      //reader.onLoad ma chahi k garne vanera logic aba
+      reader.onload = () => {
+        const loadedImage = reader.result;
+        setImage(loadedImage);
+      };
+    }
+  };
+
+  // submit button click
   const handleClick = async () => {
     const response = await updateDescription(id, content);
     const success = response.success;
     const message = response.message;
     success === true ? toast.success(message) : toast.error(message);
+    navigate("/login/home/test");
   };
-  console.log("I am home");
   return (
     <>
       <div className="flex justify-center">
@@ -285,6 +304,7 @@ const Home = () => {
                       config={editorConfig}
                       onChange={(event, editor) => {
                         const data = editor.getData();
+                        console.log(data);
                         // DOM parser le garda DOM  create vairacha of HTML
                         const parser = new DOMParser();
                         const text = parser.parseFromString(data, "text/html");
@@ -297,6 +317,7 @@ const Home = () => {
                   )}
                 </div>
               </div>
+              <input type="file" className="mt-2" onChange={handleImage} />
             </div>
             <div className="w-[60vw] flex justify-center mt-6">
               <ButtonComponent
