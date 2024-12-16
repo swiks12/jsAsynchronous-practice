@@ -14,6 +14,7 @@ const createUser=async(name,email,password,selectVal)=>{
           password:password,
           selectVal:selectVal,
           description:null,
+          image:null
         }),
       });
 }

@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { CKEditor, useCKEditorCloud } from "@ckeditor/ckeditor5-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 import "./App.css";
 import { Button } from "@mui/material";
 import ButtonComponent from "./components/ButtonComponent";
 import updateDescription from "../database/updateDescription";
 import { useNavigate } from "react-router-dom";
+import { updateImage, updateContent } from "./features/userSlice";
 
 const CLOUD_SERVICES_TOKEN_URL = import.meta.env.VITE_CLOUD_SERVICES_TOKEN_URL;
 
@@ -15,6 +17,7 @@ const LICENSE_KEY = import.meta.env.VITE_LICENSE_KEY;
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // accesiing the variables method
   // state(this is global or known to the entire project).nameOfSlice(store ma vako name not the slice ko name).values
   const [content, setContent] = useState("");
@@ -260,25 +263,44 @@ const Home = () => {
   const handleImage = (e) => {
     console.log(e);
     const file = e.target.files[0];
-    if (file) {
-      //converting to base64 used to store images of small size
-      const reader = new FileReader();
-      reader.readAsDataURL(file); //for base64
-      //reader.onLoad ma chahi k garne vanera logic aba
-      reader.onload = () => {
-        const loadedImage = reader.result;
-        setImage(loadedImage);
-      };
-    }
+    setImage(file);
+    // if (file) {
+    //   //converting to base64 used to store images of small size
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(file); //for base64
+    //   //reader.onLoad ma chahi k garne vanera logic aba
+    //   reader.onload = () => {
+    //     const loadedImage = reader.result;
+    //     setImage(loadedImage);
+    //   };
+    // }
   };
 
   // submit button click
   const handleClick = async () => {
-    const response = await updateDescription(id, content);
-    const success = response.success;
-    const message = response.message;
-    success === true ? toast.success(message) : toast.error(message);
-    navigate("/login/home/test");
+    try {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "swikriti");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/ddbewhxxb/image/upload",
+        formData
+      );
+      console.log(res.data.secure_url);
+      const uploadImage = res.data.secure_url;
+      dispatch(updateImage(uploadImage));
+      dispatch(updateContent(content));
+      const response = await updateDescription(id, content, uploadImage);
+      const success = response.success;
+      const message = response.message;
+      // globally making the desription and image available
+
+      console.log(res);
+      success === true ? toast.success(message) : toast.error(message);
+      navigate("/login/home/test");
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>

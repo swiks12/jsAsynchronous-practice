@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { data } from "react-router-dom";
+import updateDescription from "../../database/updateDescription";
 
 const userSlice=createSlice({
     name:'user',
@@ -9,7 +10,9 @@ const userSlice=createSlice({
             data:{
                 id:null,
                 name:"Swiks",
-                isLoggedIn:false
+                isLoggedIn:false,
+                reduxImage:null,
+                description:null
         },
     },
     // reducers are action performers jasle thyo slice ma vako values aathawa the global variables ma changes lyauna help garxa
@@ -24,13 +27,18 @@ const userSlice=createSlice({
         },
         updateLoggedStatus:(state,{payload})=>{
             state.data={...state.data,isLoggedIn:payload}
-
             console.log(state.data)
+        },
+        updateImage:(state,{payload})=>{
+            state.data={...state.data,reduxImage:payload}
+        },
+        updateContent:(state,{payload})=>{
+            state.data={...state.data,description:payload}
         }
     }
 })
 
-export const {updateId,updateName,updateLoggedStatus}=userSlice.actions;
+export const {updateId,updateName,updateLoggedStatus,updateImage,updateContent}=userSlice.actions;
 
 // this export is to let the store know about the reducers
 export default userSlice.reducer;
